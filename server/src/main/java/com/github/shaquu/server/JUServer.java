@@ -58,8 +58,10 @@ public class JUServer extends Thread {
                 byte[] data = (id + " : " +  content).getBytes();
 
                 for (ClientData client : clientManager) {
-                    packet = new DatagramPacket(data, data.length, client.getAddress(), client.getPort());
-                    socket.send(packet);
+                    if (!client.getId().equalsIgnoreCase(id)) {
+                        packet = new DatagramPacket(data, data.length, client.getAddress(), client.getPort());
+                        socket.send(packet);
+                    }
                 }
             } catch(Exception e) {
                 System.err.println(e);
