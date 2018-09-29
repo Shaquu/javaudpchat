@@ -21,6 +21,7 @@ public class ClientManager implements Iterable<ClientData> {
         if (!ids.contains(id)) {
             ClientData client = new ClientData(id, address, port);
             clients.add(client);
+            ids.add(id);
         }
 
         return id;
