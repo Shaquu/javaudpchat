@@ -64,14 +64,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-### JetBrains
-.idea/*
 
 # CMake
 cmake-build-*/
-
-# Mongo Explorer plugin
-.idea/**/mongoSettings.xml
 
 # File-based project format
 *.iws
@@ -85,17 +80,12 @@ out/
 # JIRA plugin
 atlassian-ide-plugin.xml
 
-# Cursive Clojure plugin
-.idea/replstate.xml
-
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Editor-based Rest Client
-.idea/httpRequests
 ### Java template
 # Compiled class file
 *.class
@@ -117,3 +107,6 @@ fabric.properties
 *.zip
 *.tar.gz
 *.rar
+
+# Idea folder
+/.idea/
