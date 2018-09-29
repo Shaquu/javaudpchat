@@ -21,16 +21,39 @@ public class ClientManager implements Iterable<ClientData> {
         ids = new HashSet<>();
     }
 
-    String add(InetAddress address, Integer port) {
-        String id = address.toString() + ":" + port;
+    String getLongId(InetAddress address, Integer port) {
+        String clientName = getClientName(address, port);
+        return clientName + " [" + address.toString() + ":" + port + "]";
+    }
 
-        if (!ids.contains(id)) {
-            ClientData client = new ClientData(id, address, port);
+    String getShortId(InetAddress address, Integer port) {
+        return address.toString() + ":" + port;
+    }
+
+    String getClientName(InetAddress address, Integer port) {
+        String shortId = getShortId(address, port);
+        return get(shortId).getName();
+    }
+
+    String add(InetAddress address, Integer port, String clientName) {
+        String shortId = getShortId(address, port);
+
+        if (!ids.contains(shortId)) {
+            ClientData client = new ClientData(shortId, address, port, clientName);
             clients.add(client);
-            ids.add(id);
+            ids.add(shortId);
         }
 
-        return id;
+        return shortId;
+    }
+
+    ClientData get(String shortId) {
+        for (ClientData clientData : clients) {
+            if (clientData.getId().equalsIgnoreCase(shortId)) {
+                return clientData;
+            }
+        }
+        return null;
     }
 
     @Override

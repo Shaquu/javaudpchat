@@ -12,11 +12,13 @@ public class ClientData {
     private String id;
     private InetAddress address;
     private Integer port;
+    private String name;
 
-    public ClientData(String id, InetAddress address, Integer port) {
+    public ClientData(String id, InetAddress address, Integer port, String name) {
         this.id = id;
         this.address = address;
         this.port = port;
+        this.name = name;
     }
 
     public String getId() {
@@ -41,5 +43,13 @@ public class ClientData {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

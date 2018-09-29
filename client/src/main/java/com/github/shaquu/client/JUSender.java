@@ -6,10 +6,14 @@
 
 package com.github.shaquu.client;
 
+import com.github.shaquu.shared.packet.BaseData;
+import com.github.shaquu.shared.packet.LogonData;
+import com.github.shaquu.shared.packet.MessageData;
 import com.github.shaquu.shared.prefs.JUPrefs;
 import com.github.shaquu.shared.prefs.JUPrefsException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -33,33 +37,58 @@ public class JUSender implements Runnable {
         this.port = (int) JUPrefs.read("port", 12345, JUPrefs.Type.INT);
     }
 
-    private void sendMessage(String message) throws Exception {
-        byte buf[] = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
-        socket.send(packet);
+    private boolean sendLogOn(String clientName) throws Exception {
+        LogonData logonData = new LogonData(clientName);
+        byte[] bytes = BaseData.getBytes(logonData);
+        sendBytes(bytes);
+        return true;
+    }
+
+    private void sendMessage(String clientName, String message) throws Exception {
+        MessageData messagePacket = new MessageData(clientName, message);
+        byte[] bytes = BaseData.getBytes(messagePacket);
+        sendBytes(bytes);
     }
 
     public void run() {
         System.out.println("Starting sender.");
-        do {
+
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String clientName = null;
+
+        try {
+            clientName = (String) JUPrefs.read("clientName", null, JUPrefs.Type.STRING);
+        } catch (JUPrefsException e) {
+            e.printStackTrace();
+        }
+
+        while (!connected) {
             try {
-                sendMessage("Hello");
-                connected = true;
+                if (clientName == null) {
+                    System.out.println("Your name: ");
+                    clientName = in.readLine();
+                }
+                connected = sendLogOn(clientName);
             } catch (Exception e) {
                 System.err.println(e);
             }
-        } while (!connected);
+        }
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             try {
                 while (!in.ready()) {
                     Thread.sleep(100);
                 }
-                sendMessage(in.readLine());
+                sendMessage(clientName, in.readLine());
             } catch (Exception e) {
                 System.err.println(e);
             }
         }
+    }
+
+    private void sendBytes(byte[] bytes) throws IOException {
+        DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, port);
+        socket.send(packet);
     }
 }

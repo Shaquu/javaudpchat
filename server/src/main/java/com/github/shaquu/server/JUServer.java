@@ -6,9 +6,13 @@
 
 package com.github.shaquu.server;
 
+import com.github.shaquu.shared.packet.BaseData;
+import com.github.shaquu.shared.packet.LogonData;
+import com.github.shaquu.shared.packet.MessageData;
 import com.github.shaquu.shared.prefs.JUPrefs;
 import com.github.shaquu.shared.prefs.JUPrefsException;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
@@ -50,22 +54,52 @@ public class JUServer extends Thread {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
 
-                String content = new String(buf, UTF8_CHARSET);
+                BaseData data = BaseData.getPacket(buf);
 
-                String id = clientManager.add(packet.getAddress(), packet.getPort());
-
-                System.out.println(id + " : " + content);
-                byte[] data = (id + " : " +  content).getBytes();
-
-                for (ClientData client : clientManager) {
-                    if (!client.getId().equalsIgnoreCase(id)) {
-                        packet = new DatagramPacket(data, data.length, client.getAddress(), client.getPort());
-                        socket.send(packet);
-                    }
-                }
+                handlePacket(data, packet);
             } catch(Exception e) {
                 System.err.println(e);
             }
         }
+    }
+
+    private void handlePacket (BaseData data, DatagramPacket packet) throws IOException {
+        if (data instanceof LogonData) {
+            LogonData logonData = (LogonData) data;
+            String shortId = clientManager.add(packet.getAddress(), packet.getPort(), logonData.getClientName());
+            String longId = clientManager.getLongId(packet.getAddress(), packet.getPort());
+
+            System.out.println(longId + " : " + logonData);
+
+            LogonData logonDataResponse = new LogonData("SERWER");
+            byte[] bytes = BaseData.getBytes(logonDataResponse);
+
+            ClientData client = clientManager.get(shortId);
+
+            sendBytes(client, bytes);
+        } else if (data instanceof MessageData) {
+            MessageData messagePacket = (MessageData) data;
+            String shortId = clientManager.getShortId(packet.getAddress(), packet.getPort());
+
+            if (clientManager.get(shortId) == null) {
+                System.out.println("UNREGISTERED USER");
+                System.out.println(shortId + " : " + messagePacket);
+            } else {
+                String longId = clientManager.getLongId(packet.getAddress(), packet.getPort());
+                System.out.println(longId + " : " + messagePacket);
+                byte[] bytes = BaseData.getBytes(messagePacket);
+
+                for (ClientData client : clientManager) {
+                    if (!client.getId().equalsIgnoreCase(shortId)) {
+                        sendBytes(client, bytes);
+                    }
+                }
+            }
+        }
+    }
+
+    private void sendBytes(ClientData client, byte[] bytes) throws IOException {
+        DatagramPacket packet = new DatagramPacket(bytes, bytes.length, client.getAddress(), client.getPort());
+        socket.send(packet);
     }
 }

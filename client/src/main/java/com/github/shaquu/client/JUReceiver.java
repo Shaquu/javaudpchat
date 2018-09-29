@@ -6,9 +6,13 @@
 
 package com.github.shaquu.client;
 
+import com.github.shaquu.shared.packet.BaseData;
+import com.github.shaquu.shared.packet.LogonData;
+import com.github.shaquu.shared.packet.MessageData;
 import com.github.shaquu.shared.prefs.JUPrefs;
 import com.github.shaquu.shared.prefs.JUPrefsException;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
@@ -29,11 +33,27 @@ public class JUReceiver implements Runnable {
             try {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
-                String received = new String(packet.getData(), 0, packet.getLength());
-                System.out.println(received);
+
+                BaseData data = BaseData.getPacket(buf);
+                handlePacket(data, packet);
             } catch(Exception e) {
                 System.err.println(e);
             }
+        }
+    }
+
+
+    private void handlePacket (BaseData data, DatagramPacket packet) throws IOException {
+        if (data instanceof LogonData) {
+            LogonData logonData = (LogonData) data;
+            String clientName = logonData.getClientName();
+
+            System.out.println(clientName + " : GOOD");
+        } else if (data instanceof MessageData) {
+            MessageData messagePacket = (MessageData) data;
+            String clientName = messagePacket.getClientName();
+
+            System.out.println(clientName + " : " + messagePacket.getMessage());
         }
     }
 }

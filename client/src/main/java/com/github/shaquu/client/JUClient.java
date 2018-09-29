@@ -16,8 +16,9 @@ public class JUClient {
         System.out.println("Starting client.");
         new JUPrefs();
 
-        if (args.length > 0) {
+        if (args.length >= 2) {
             JUPrefs.write("ip", args[0], JUPrefs.Type.STRING);
+            JUPrefs.write("clientName", args[1], JUPrefs.Type.STRING);
         }
 
         DatagramSocket socket = new DatagramSocket();
