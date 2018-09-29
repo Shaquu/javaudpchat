@@ -8,6 +8,8 @@
     <artifactId>java-udp-chat</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>pom</packaging>
+
     <modules>
         <module>shared</module>
         <module>client</module>
@@ -18,5 +20,16 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.shaquu</groupId>
+                <artifactId>shared</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
