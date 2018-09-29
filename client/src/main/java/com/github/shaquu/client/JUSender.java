@@ -40,6 +40,7 @@ public class JUSender implements Runnable {
     }
 
     private boolean sendLogOn(String clientName) throws Exception {
+        System.out.println("Trygin to LogOn : " + address.getHostAddress());
         LogonData logonData = new LogonData(clientName);
         byte[] bytes = BaseData.getBytes(logonData);
         sendBytes(bytes);
