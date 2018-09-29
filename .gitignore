@@ -110,3 +110,4 @@ fabric.properties
 
 # Idea folder
 /.idea/
+/*.iml
