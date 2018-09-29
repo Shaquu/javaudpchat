@@ -1,3 +1,9 @@
+/*
+ *  @author  shaq
+ *  @version 1.0
+ *  @since   9/29/18 8:06 PM
+ */
+
 package com.github.shaquu.client;
 
 import com.github.shaquu.shared.prefs.JUPrefs;
