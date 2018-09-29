@@ -11,9 +11,17 @@ import com.github.shaquu.shared.JUUtils;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+/**
+ * The type JavaUdpPrefs.
+ */
 public class JUPrefs {
     private static Preferences preferences;
 
+    /**
+     * Instantiates a new JavaUdpPrefs.
+     *
+     * @throws JUPrefsException the JavaUdpPefs exception
+     */
     public JUPrefs() throws JUPrefsException {
         init();
     }
@@ -37,6 +45,15 @@ public class JUPrefs {
         }
     }
 
+    /**
+     * Write.
+     *
+     * @param path   the path
+     * @param object the object
+     * @param type   the type
+     *
+     * @throws JUPrefsException the JavaUdpPrefs exception
+     */
     public static void write(String path, Object object, Type type) throws JUPrefsException {
         init();
 
@@ -69,6 +86,15 @@ public class JUPrefs {
         }
     }
 
+    /**
+     * Exist boolean.
+     *
+     * @param path the path
+     *
+     * @return the boolean
+     *
+     * @throws JUPrefsException the JavaUdpPrefs exception
+     */
     public static boolean exist(String path) throws JUPrefsException {
         try {
             return preferences.nodeExists(path);
@@ -77,6 +103,17 @@ public class JUPrefs {
         }
     }
 
+    /**
+     * Read object.
+     *
+     * @param path     the path
+     * @param optional the optional
+     * @param type     the type
+     *
+     * @return the object
+     *
+     * @throws JUPrefsException the JavaUdpPrefs exception
+     */
     public static Object read(String path, Object optional, Type type) throws JUPrefsException {
         init();
 
@@ -104,6 +141,13 @@ public class JUPrefs {
         return optional;
     }
 
+    /**
+     * Remove.
+     *
+     * @param path the path
+     *
+     * @throws JUPrefsException the JavaUdpPrefs exception
+     */
     public static void remove(String path) throws JUPrefsException {
         init();
 
@@ -114,7 +158,37 @@ public class JUPrefs {
         }
     }
 
+    /**
+     * The enum Type.
+     */
     public enum Type {
-        STRING, BOOLEAN, BYTE_ARRAY, LONG, INT, FLOAT, DOUBLE
+        /**
+         * String type.
+         */
+        STRING,
+        /**
+         * Boolean type.
+         */
+        BOOLEAN,
+        /**
+         * Byte array type.
+         */
+        BYTE_ARRAY,
+        /**
+         * Long type.
+         */
+        LONG,
+        /**
+         * Int type.
+         */
+        INT,
+        /**
+         * Float type.
+         */
+        FLOAT,
+        /**
+         * Double type.
+         */
+        DOUBLE
     }
 }

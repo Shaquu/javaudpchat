@@ -22,6 +22,9 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * The type JavaUdpSender.
+ */
 public class JUSender implements Runnable {
     private InetAddress address;
     private int port;
@@ -30,6 +33,15 @@ public class JUSender implements Runnable {
 
     private boolean connected = false;
 
+    /**
+     * Instantiates a new JavaUdpSender.
+     *
+     * @param socket the socket
+     *
+     * @throws JUPrefsException     the JavaUdpPrefs exception
+     * @throws UnknownHostException the unknown host exception
+     * @throws JUUtilsException     the JavaUdpUtils exception
+     */
     JUSender(DatagramSocket socket) throws JUPrefsException, UnknownHostException, JUUtilsException {
         this.socket = socket;
 

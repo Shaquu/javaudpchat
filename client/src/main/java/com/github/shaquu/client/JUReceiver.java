@@ -16,10 +16,20 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+/**
+ * The type JavaUdpReceiver.
+ */
 public class JUReceiver implements Runnable {
     private DatagramSocket socket;
     private byte buf[];
 
+    /**
+     * Instantiates a new JavaUdpReceiver.
+     *
+     * @param socket the socket
+     *
+     * @throws JUPrefsException the JavaUdpPrefs exception
+     */
     JUReceiver(DatagramSocket socket) throws JUPrefsException {
         this.socket = socket;
 

@@ -13,12 +13,25 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 
+/**
+ * The type JavaUdpUtils.
+ */
 public class JUUtils {
 
+    /**
+     * Instantiates a new JavaUdpUtils.
+     */
     public JUUtils() {
 
     }
 
+    /**
+     * Gets public ip.
+     *
+     * @return the public ip
+     *
+     * @throws JUUtilsException the JavaUdpUtils exception
+     */
     public static String getPublicIp() throws JUUtilsException {
         try {
             URL checkip = new URL("http://checkip.amazonaws.com");
@@ -33,6 +46,13 @@ public class JUUtils {
         }
     }
 
+    /**
+     * Gets global ip.
+     *
+     * @return the global ip
+     *
+     * @throws JUUtilsException the JavaUdpUtils exception
+     */
     public static String getGlobalIp() throws JUUtilsException {
         try {
             URL checkip = new URL("https://raw.githubusercontent.com/Shaquu/javaudpchat/master/global.ip");

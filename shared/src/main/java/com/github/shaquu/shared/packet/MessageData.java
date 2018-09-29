@@ -6,11 +6,20 @@
 
 package com.github.shaquu.shared.packet;
 
+/**
+ * The type Message data.
+ */
 public class MessageData extends BaseData {
 
     private String clientName;
     private String message;
 
+    /**
+     * Instantiates a new Message data.
+     *
+     * @param clientName the client name
+     * @param message    the message
+     */
     public MessageData(String clientName, String message) {
         super(Type.MESSAGE);
 
@@ -18,11 +27,29 @@ public class MessageData extends BaseData {
         this.message = message;
     }
 
+    /**
+     * Gets message.
+     *
+     * @return the message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Gets client name.
+     *
+     * @return the client name
+     */
     public String getClientName() {
         return clientName;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageData{" +
+                "clientName='" + clientName + '\'' +
+                ", message='" + message + '\'' +
+                '}';
     }
 }

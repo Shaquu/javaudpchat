@@ -12,29 +12,68 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * The type Client manager.
+ */
 public class ClientManager implements Iterable<ClientData> {
     private HashSet<String> ids;
     private ArrayList<ClientData> clients;
 
+    /**
+     * Instantiates a new Client manager.
+     */
     ClientManager() {
         clients = new ArrayList<>();
         ids = new HashSet<>();
     }
 
+    /**
+     * Gets long id.
+     *
+     * @param address the address
+     * @param port    the port
+     *
+     * @return the long id
+     */
     String getLongId(InetAddress address, Integer port) {
         String clientName = getClientName(address, port);
         return clientName + " [" + address.toString() + ":" + port + "]";
     }
 
+    /**
+     * Gets short id.
+     *
+     * @param address the address
+     * @param port    the port
+     *
+     * @return the short id
+     */
     String getShortId(InetAddress address, Integer port) {
         return address.toString() + ":" + port;
     }
 
+    /**
+     * Gets client name.
+     *
+     * @param address the address
+     * @param port    the port
+     *
+     * @return the client name
+     */
     String getClientName(InetAddress address, Integer port) {
         String shortId = getShortId(address, port);
         return get(shortId).getName();
     }
 
+    /**
+     * Add string.
+     *
+     * @param address    the address
+     * @param port       the port
+     * @param clientName the client name
+     *
+     * @return the string
+     */
     String add(InetAddress address, Integer port, String clientName) {
         String shortId = getShortId(address, port);
 
@@ -47,6 +86,13 @@ public class ClientManager implements Iterable<ClientData> {
         return shortId;
     }
 
+    /**
+     * Get client data.
+     *
+     * @param shortId the short id
+     *
+     * @return the client data
+     */
     ClientData get(String shortId) {
         for (ClientData clientData : clients) {
             if (clientData.getId().equalsIgnoreCase(shortId)) {
@@ -65,6 +111,9 @@ public class ClientManager implements Iterable<ClientData> {
         private int cursor;
         private final int end;
 
+        /**
+         * Instantiates a new Client manager iterator.
+         */
         ClientManagerIterator() {
             this.cursor = 0;
             this.end = clients.size();

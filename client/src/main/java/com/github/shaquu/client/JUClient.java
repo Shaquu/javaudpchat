@@ -11,8 +11,18 @@ import com.github.shaquu.shared.prefs.JUPrefs;
 
 import java.net.DatagramSocket;
 
+/**
+ * JavaUdpClient.
+ */
 public class JUClient {
 
+    /**
+     * Main.
+     *
+     * @param args the args
+     *
+     * @throws Exception the exception
+     */
     public static void main(String args[]) throws Exception {
         System.out.println("Starting client.");
         new JUPrefs();

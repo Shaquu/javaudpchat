@@ -6,8 +6,17 @@
 
 package com.github.shaquu.shared.prefs;
 
+/**
+ * The type JavaUdpPrefsException.
+ */
 public class JUPrefsException extends Exception {
 
+    /**
+     * Instantiates a new JavaUdpPrefs exception.
+     *
+     * @param message   the message
+     * @param exception the exception
+     */
     public JUPrefsException(String message, Exception exception) {
         super(message, exception);
     }

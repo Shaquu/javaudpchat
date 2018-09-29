@@ -8,18 +8,41 @@ package com.github.shaquu.shared.packet;
 
 import java.io.*;
 
+/**
+ * The type Base data.
+ */
 public abstract class BaseData implements Serializable {
 
     private Type type;
 
+    /**
+     * Instantiates a new Base data.
+     *
+     * @param type the type
+     */
     public BaseData(Type type) {
         this.type = type;
     }
 
+    /**
+     * Gets type.
+     *
+     * @return the type
+     */
     public Type getType() {
         return type;
     }
 
+    /**
+     * Gets packet.
+     *
+     * @param bytes the bytes
+     *
+     * @return the packet
+     *
+     * @throws IOException            the io exception
+     * @throws ClassNotFoundException the class not found exception
+     */
     public static BaseData getPacket(byte[] bytes) throws IOException, ClassNotFoundException {
         ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 
@@ -34,6 +57,15 @@ public abstract class BaseData implements Serializable {
         return packet;
     }
 
+    /**
+     * Get bytes byte [ ].
+     *
+     * @param packet the packet
+     *
+     * @return the byte [ ]
+     *
+     * @throws IOException the io exception
+     */
     public static byte[] getBytes(BaseData packet) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -48,7 +80,24 @@ public abstract class BaseData implements Serializable {
         return bytes;
     }
 
+    /**
+     * The enum Type.
+     */
     public enum Type {
-        LOGON, MESSAGE
+        /**
+         * Logon type.
+         */
+        LOGON,
+        /**
+         * Message type.
+         */
+        MESSAGE
+    }
+
+    @Override
+    public String toString() {
+        return "BaseData{" +
+                "type=" + type +
+                '}';
     }
 }

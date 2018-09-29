@@ -6,8 +6,17 @@
 
 package com.github.shaquu.shared;
 
+/**
+ * The type JavaUdpUtilsException.
+ */
 public class JUUtilsException extends Exception {
 
+    /**
+     * Instantiates a new JavaUdpUtilsException.
+     *
+     * @param message   the message
+     * @param exception the exception
+     */
     JUUtilsException(String message, Exception exception) {
         super(message, exception);
     }

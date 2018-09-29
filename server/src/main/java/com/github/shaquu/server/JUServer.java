@@ -19,6 +19,9 @@ import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
+/**
+ * The type JavaUdpServer.
+ */
 public class JUServer extends Thread {
     private static int port;
     private static int buffer;
@@ -29,10 +32,23 @@ public class JUServer extends Thread {
 
     private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
+    /**
+     * Main.
+     *
+     * @param args the args
+     *
+     * @throws Exception the exception
+     */
     public static void main(String args[]) throws Exception {
         new JUServer().start();
     }
 
+    /**
+     * Instantiates a new JavaUdpServer.
+     *
+     * @throws JUPrefsException the JavaUdpPrefs exception
+     * @throws SocketException  the socket exception
+     */
     public JUServer() throws JUPrefsException, SocketException {
         System.out.println("Starting server.");
         new JUPrefs();
