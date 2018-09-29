@@ -29,16 +29,16 @@ public class ClientManager implements Iterable<ClientData> {
 
     @Override
     public Iterator<ClientData> iterator() {
-        return new ClientManagerIterator(clients.size());
+        return new ClientManagerIterator();
     }
 
     private class ClientManagerIterator implements Iterator {
         private int cursor;
         private final int end;
 
-        ClientManagerIterator(int end) {
+        ClientManagerIterator() {
             this.cursor = 0;
-            this.end = end;
+            this.end = clients.size();
         }
 
         public boolean hasNext() {
