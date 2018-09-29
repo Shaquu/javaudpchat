@@ -58,7 +58,7 @@ public class JUPrefs {
         init();
 
         try {
-            switch (type){
+            switch (type) {
                 case INT:
                     preferences.putInt(path, (Integer) object);
                     break;
@@ -118,7 +118,7 @@ public class JUPrefs {
         init();
 
         try {
-            switch (type){
+            switch (type) {
                 case INT:
                     return preferences.getInt(path, (Integer) optional);
                 case LONG:

@@ -108,8 +108,8 @@ public class ClientManager implements Iterable<ClientData> {
     }
 
     private class ClientManagerIterator implements Iterator {
-        private int cursor;
         private final int end;
+        private int cursor;
 
         /**
          * Instantiates a new Client manager iterator.
@@ -124,7 +124,7 @@ public class ClientManager implements Iterable<ClientData> {
         }
 
         public ClientData next() {
-            if(this.hasNext()) {
+            if (this.hasNext()) {
                 ClientData current = clients.get(cursor);
                 cursor++;
                 return current;

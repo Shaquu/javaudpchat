@@ -33,17 +33,6 @@ public class JUServer extends Thread {
     private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
     /**
-     * Main.
-     *
-     * @param args the args
-     *
-     * @throws Exception the exception
-     */
-    public static void main(String args[]) throws Exception {
-        new JUServer().start();
-    }
-
-    /**
      * Instantiates a new JavaUdpServer.
      *
      * @throws JUPrefsException the JavaUdpPrefs exception
@@ -61,25 +50,36 @@ public class JUServer extends Thread {
         clientManager = new ClientManager();
     }
 
+    /**
+     * Main.
+     *
+     * @param args the args
+     *
+     * @throws Exception the exception
+     */
+    public static void main(String args[]) throws Exception {
+        new JUServer().start();
+    }
+
     public void run() {
         System.out.println("Listening...");
         byte[] buf = new byte[buffer];
         while (true) {
             try {
-                Arrays.fill(buf, (byte)0);
+                Arrays.fill(buf, (byte) 0);
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
 
                 BaseData data = BaseData.getPacket(buf);
 
                 handlePacket(data, packet);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.err.println(e);
             }
         }
     }
 
-    private void handlePacket (BaseData data, DatagramPacket packet) throws IOException {
+    private void handlePacket(BaseData data, DatagramPacket packet) throws IOException {
         if (data instanceof LogonData) {
             LogonData logonData = (LogonData) data;
             String shortId = clientManager.add(packet.getAddress(), packet.getPort(), logonData.getClientName());

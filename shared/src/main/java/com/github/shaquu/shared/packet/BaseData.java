@@ -25,15 +25,6 @@ public abstract class BaseData implements Serializable {
     }
 
     /**
-     * Gets type.
-     *
-     * @return the type
-     */
-    public Type getType() {
-        return type;
-    }
-
-    /**
      * Gets packet.
      *
      * @param bytes the bytes
@@ -50,9 +41,7 @@ public abstract class BaseData implements Serializable {
 
         BaseData packet = (BaseData) in.readObject();
 
-        if (in != null) {
-            in.close();
-        }
+        in.close();
 
         return packet;
     }
@@ -81,6 +70,22 @@ public abstract class BaseData implements Serializable {
     }
 
     /**
+     * Gets type.
+     *
+     * @return the type
+     */
+    public Type getType() {
+        return type;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseData{" +
+                "type=" + type +
+                '}';
+    }
+
+    /**
      * The enum Type.
      */
     public enum Type {
@@ -92,12 +97,5 @@ public abstract class BaseData implements Serializable {
          * Message type.
          */
         MESSAGE
-    }
-
-    @Override
-    public String toString() {
-        return "BaseData{" +
-                "type=" + type +
-                '}';
     }
 }

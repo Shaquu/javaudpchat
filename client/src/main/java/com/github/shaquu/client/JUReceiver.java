@@ -12,7 +12,6 @@ import com.github.shaquu.shared.packet.MessageData;
 import com.github.shaquu.shared.prefs.JUPrefs;
 import com.github.shaquu.shared.prefs.JUPrefsException;
 
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
@@ -46,14 +45,14 @@ public class JUReceiver implements Runnable {
 
                 BaseData data = BaseData.getPacket(buf);
                 handlePacket(data, packet);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.err.println(e);
             }
         }
     }
 
 
-    private void handlePacket (BaseData data, DatagramPacket packet) throws IOException {
+    private void handlePacket(BaseData data, DatagramPacket packet) {
         if (data instanceof LogonData) {
             LogonData logonData = (LogonData) data;
             String clientName = logonData.getClientName();
