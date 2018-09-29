@@ -6,6 +6,8 @@
 
 package com.github.shaquu.client;
 
+import com.github.shaquu.shared.JUUtils;
+import com.github.shaquu.shared.JUUtilsException;
 import com.github.shaquu.shared.packet.BaseData;
 import com.github.shaquu.shared.packet.LogonData;
 import com.github.shaquu.shared.packet.MessageData;
@@ -28,10 +30,10 @@ public class JUSender implements Runnable {
 
     private boolean connected = false;
 
-    JUSender(DatagramSocket socket) throws JUPrefsException, UnknownHostException {
+    JUSender(DatagramSocket socket) throws JUPrefsException, UnknownHostException, JUUtilsException {
         this.socket = socket;
 
-        String ip = (String) JUPrefs.read("ip", "", JUPrefs.Type.STRING);
+        String ip = (String) JUPrefs.read("ip", JUUtils.getGlobalIp(), JUPrefs.Type.STRING);
         this.address = InetAddress.getByName(ip);
 
         this.port = (int) JUPrefs.read("port", 12345, JUPrefs.Type.INT);

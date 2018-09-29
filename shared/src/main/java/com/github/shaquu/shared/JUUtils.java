@@ -33,4 +33,18 @@ public class JUUtils {
         }
     }
 
+    public static String getGlobalIp() throws JUUtilsException {
+        try {
+            URL checkip = new URL("https://raw.githubusercontent.com/Shaquu/javaudpchat/master/global.ip");
+            BufferedReader in = new BufferedReader(new InputStreamReader(checkip.openStream()));
+            return in.readLine();
+        } catch (IOException e) {
+            try {
+                return InetAddress.getLocalHost().getHostAddress();
+            } catch (UnknownHostException ee) {
+                throw new JUUtilsException("Cannot determing ip address.", ee);
+            }
+        }
+    }
+
 }
