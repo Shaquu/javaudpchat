@@ -28,27 +28,6 @@ public class JUUtils {
     }
 
     /**
-     * Gets public ip.
-     *
-     * @return the public ip
-     *
-     * @throws JUUtilsException the JavaUdpUtils exception
-     */
-    public static String getPublicIp() throws JUUtilsException {
-        try {
-            URL checkip = new URL("http://checkip.amazonaws.com");
-            BufferedReader in = new BufferedReader(new InputStreamReader(checkip.openStream()));
-            return in.readLine();
-        } catch (IOException e) {
-            try {
-                return InetAddress.getLocalHost().getHostAddress();
-            } catch (UnknownHostException ee) {
-                throw new JUUtilsException("Cannot determing ip address.", ee);
-            }
-        }
-    }
-
-    /**
      * Gets global ip.
      *
      * @return the global ip
