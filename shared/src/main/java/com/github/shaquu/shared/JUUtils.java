@@ -18,6 +18,8 @@ import java.net.UnknownHostException;
  */
 public class JUUtils {
 
+    public final static int BUFFER_SIZE = 1024;
+
     /**
      * Instantiates a new JavaUdpUtils.
      */

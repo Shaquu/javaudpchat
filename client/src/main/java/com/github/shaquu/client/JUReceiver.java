@@ -6,11 +6,10 @@
 
 package com.github.shaquu.client;
 
+import com.github.shaquu.shared.JUUtils;
 import com.github.shaquu.shared.packet.BaseData;
 import com.github.shaquu.shared.packet.LogonData;
 import com.github.shaquu.shared.packet.MessageData;
-import com.github.shaquu.shared.prefs.JUPrefs;
-import com.github.shaquu.shared.prefs.JUPrefsException;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -27,13 +26,10 @@ public class JUReceiver implements Runnable {
      *
      * @param socket the socket
      *
-     * @throws JUPrefsException the JavaUdpPrefs exception
      */
-    JUReceiver(DatagramSocket socket) throws JUPrefsException {
+    JUReceiver(DatagramSocket socket) {
         this.socket = socket;
-
-        int buffer = (int) JUPrefs.read("buffer", 1024, JUPrefs.Type.INT);
-        this.buf = new byte[buffer];
+        this.buf = new byte[JUUtils.BUFFER_SIZE];
     }
 
     public void run() {

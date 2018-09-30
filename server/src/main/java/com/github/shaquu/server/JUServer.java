@@ -6,6 +6,7 @@
 
 package com.github.shaquu.server;
 
+import com.github.shaquu.shared.JUUtils;
 import com.github.shaquu.shared.packet.BaseData;
 import com.github.shaquu.shared.packet.LogonData;
 import com.github.shaquu.shared.packet.MessageData;
@@ -24,7 +25,6 @@ import java.util.Arrays;
  */
 public class JUServer extends Thread {
     private static int port;
-    private static int buffer;
 
     private static DatagramSocket socket;
 
@@ -43,7 +43,6 @@ public class JUServer extends Thread {
         new JUPrefs();
 
         port = (int) JUPrefs.read("port", 12345, JUPrefs.Type.INT);
-        buffer = (int) JUPrefs.read("buffer", 1024, JUPrefs.Type.INT);
 
         socket = new DatagramSocket(port);
 
@@ -63,7 +62,7 @@ public class JUServer extends Thread {
 
     public void run() {
         System.out.println("Listening...");
-        byte[] buf = new byte[buffer];
+        byte[] buf = new byte[JUUtils.BUFFER_SIZE];
         while (true) {
             try {
                 Arrays.fill(buf, (byte) 0);

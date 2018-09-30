@@ -6,8 +6,6 @@
 
 package com.github.shaquu.shared.prefs;
 
-import com.github.shaquu.shared.JUUtils;
-
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -30,15 +28,6 @@ public class JUPrefs {
         if (preferences == null) {
             try {
                 preferences = Preferences.userRoot().node(JUPrefs.class.getName());
-
-                String ip = JUUtils.getPublicIp();
-                write("ip", ip, Type.STRING);
-
-                int port = 12345;
-                write("port", port, Type.INT);
-
-                int buffer = 1024;
-                write("buffer", buffer, Type.INT);
             } catch (Exception e) {
                 throw new JUPrefsException("Failed on JUPrefs initialization.", e);
             }
