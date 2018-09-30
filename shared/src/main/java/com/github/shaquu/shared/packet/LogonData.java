@@ -16,10 +16,11 @@ public class LogonData extends BaseData {
     /**
      * Instantiates a new Logon data.
      *
+     * @param type       the type
      * @param clientName the client name
      */
-    public LogonData(String clientName) {
-        super(Type.LOGON);
+    public LogonData(Type type, String clientName) {
+        super(type);
         this.clientName = clientName;
     }
 

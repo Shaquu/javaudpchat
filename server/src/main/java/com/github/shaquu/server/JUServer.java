@@ -87,26 +87,30 @@ public class JUServer extends Thread {
 
             System.out.println(longId + " : " + logonData);
 
-            LogonData logonDataResponse = new LogonData("SERWER");
+            LogonData logonDataResponse = new LogonData(BaseData.Type.CONFIRM, "SERWER");
             byte[] bytes = BaseData.getBytes(logonDataResponse);
 
             ClientData client = clientManager.get(shortId);
 
             sendBytes(client, bytes);
         } else if (data instanceof MessageData) {
-            MessageData messagePacket = (MessageData) data;
+            MessageData messageData = (MessageData) data;
             String shortId = clientManager.getShortId(packet.getAddress(), packet.getPort());
 
             if (clientManager.get(shortId) == null) {
                 System.out.println("UNREGISTERED USER");
-                System.out.println(shortId + " : " + messagePacket);
+                System.out.println(shortId + " : " + messageData);
             } else {
                 String longId = clientManager.getLongId(packet.getAddress(), packet.getPort());
-                System.out.println(longId + " : " + messagePacket);
-                byte[] bytes = BaseData.getBytes(messagePacket);
+                System.out.println(longId + " : " + messageData);
+                byte[] bytes = BaseData.getBytes(messageData);
 
                 for (ClientData client : clientManager) {
                     if (!client.getId().equalsIgnoreCase(shortId)) {
+                        sendBytes(client, bytes);
+                    } else {
+                        MessageData messageDataResponse = new MessageData(BaseData.Type.CONFIRM, "SERWER", "GOOD");
+                        byte[] bytesResponse = BaseData.getBytes(messageDataResponse);
                         sendBytes(client, bytes);
                     }
                 }

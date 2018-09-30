@@ -17,11 +17,12 @@ public class MessageData extends BaseData {
     /**
      * Instantiates a new Message data.
      *
+     * @param type       the type
      * @param clientName the client name
      * @param message    the message
      */
-    public MessageData(String clientName, String message) {
-        super(Type.MESSAGE);
+    public MessageData(Type type, String clientName, String message) {
+        super(type);
 
         this.clientName = clientName;
         this.message = message;

@@ -90,12 +90,12 @@ public abstract class BaseData implements Serializable {
      */
     public enum Type {
         /**
-         * Logon type.
+         * Request type.
          */
-        LOGON,
+        REQUEST,
         /**
-         * Message type.
+         * Confirm type.
          */
-        MESSAGE
+        CONFIRM
     }
 }
