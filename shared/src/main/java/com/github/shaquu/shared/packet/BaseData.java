@@ -6,7 +6,10 @@
 
 package com.github.shaquu.shared.packet;
 
+import com.github.shaquu.shared.JUUtils;
+
 import java.io.*;
+import java.util.zip.DataFormatException;
 
 /**
  * The type Base data.
@@ -14,6 +17,8 @@ import java.io.*;
 public abstract class BaseData implements Serializable {
 
     private Type type;
+    private static long globalId = 0;
+    private long id;
 
     /**
      * Instantiates a new Base data.
@@ -22,6 +27,7 @@ public abstract class BaseData implements Serializable {
      */
     public BaseData(Type type) {
         this.type = type;
+        id = globalId++;
     }
 
     /**
@@ -33,9 +39,12 @@ public abstract class BaseData implements Serializable {
      *
      * @throws IOException            the io exception
      * @throws ClassNotFoundException the class not found exception
+     * @throws DataFormatException    the data format exception
      */
-    public static BaseData getPacket(byte[] bytes) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+    public static BaseData getPacket(byte[] bytes) throws IOException, ClassNotFoundException, DataFormatException {
+        byte[] uncompressed = JUUtils.decompress(bytes);
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(uncompressed);
 
         ObjectInput in = new ObjectInputStream(bis);
 
@@ -63,10 +72,9 @@ public abstract class BaseData implements Serializable {
         out.flush();
 
         byte[] bytes = bos.toByteArray();
-
         bos.close();
 
-        return bytes;
+        return JUUtils.compress(bytes);
     }
 
     /**
@@ -97,5 +105,23 @@ public abstract class BaseData implements Serializable {
          * Confirm type.
          */
         CONFIRM
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 }
