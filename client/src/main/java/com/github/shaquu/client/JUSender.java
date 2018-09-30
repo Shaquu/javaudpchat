@@ -71,6 +71,7 @@ public class JUSender implements Runnable {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String clientName = null;
+        String message;
 
         try {
             clientName = (String) JUPrefs.read("clientName", null, JUPrefs.Type.STRING);
@@ -83,6 +84,10 @@ public class JUSender implements Runnable {
                 if (clientName == null) {
                     System.out.println("Your name: ");
                     clientName = in.readLine();
+
+                    if (clientName.trim().length() < 1) {
+                        clientName = null;
+                    }
                 }
                 connected = sendLogOn(clientName);
             } catch (Exception e) {
@@ -95,7 +100,15 @@ public class JUSender implements Runnable {
                 while (!in.ready()) {
                     Thread.sleep(100);
                 }
-                sendMessage(clientName, in.readLine());
+                message = in.readLine();
+
+                if (message.trim().length() < 1) {
+                    message = null;
+                }
+
+                if (message != null) {
+                    sendMessage(clientName, message);
+                }
             } catch (Exception e) {
                 System.err.println(e);
             }

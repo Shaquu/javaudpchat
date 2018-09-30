@@ -58,6 +58,14 @@ public class JUReceiver implements Runnable {
             MessageData messagePacket = (MessageData) data;
             String clientName = messagePacket.getClientName();
 
+            if (clientName.equalsIgnoreCase(((MessageData) data).getClientName())) {
+                return;
+            }
+
+            if (messagePacket.getType().equals(BaseData.Type.CONFIRM)) {
+                return;
+            }
+
             System.out.println(clientName + " : " + messagePacket.getMessage());
         }
     }
