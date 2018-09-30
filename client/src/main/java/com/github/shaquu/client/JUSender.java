@@ -53,14 +53,14 @@ public class JUSender implements Runnable {
 
     private boolean sendLogOn(String clientName) throws Exception {
         System.out.println("Trygin to LogOn : " + address.getHostAddress());
-        LogonData logonData = new LogonData(clientName);
+        LogonData logonData = new LogonData(BaseData.Type.REQUEST, clientName);
         byte[] bytes = BaseData.getBytes(logonData);
         sendBytes(bytes);
         return true;
     }
 
     private void sendMessage(String clientName, String message) throws Exception {
-        MessageData messagePacket = new MessageData(clientName, message);
+        MessageData messagePacket = new MessageData(BaseData.Type.REQUEST, clientName, message);
         byte[] bytes = BaseData.getBytes(messagePacket);
         sendBytes(bytes);
     }

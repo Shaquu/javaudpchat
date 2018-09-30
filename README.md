@@ -11,7 +11,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Shaquu/javaudpchat/tags). 
+We (try to) use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Shaquu/javaudpchat/tags). 
 
 ## Authors
 
