@@ -29,12 +29,12 @@ public class JUClient {
 
         if (args.length >= 1) {
             JUPrefs.write("clientName", args[0], JUPrefs.Type.STRING);
+        }
 
-            if (args.length >= 2) {
-                JUPrefs.write("ip", args[1], JUPrefs.Type.STRING);
-            } else {
-                JUPrefs.write("ip", JUUtils.getGlobalIp(), JUPrefs.Type.STRING);
-            }
+        if (args.length >= 2) {
+            JUPrefs.write("ip", args[1], JUPrefs.Type.STRING);
+        } else {
+            JUPrefs.write("ip", JUUtils.getGlobalIp(), JUPrefs.Type.STRING);
         }
 
         DatagramSocket socket = new DatagramSocket();
