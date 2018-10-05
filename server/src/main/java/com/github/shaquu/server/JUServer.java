@@ -24,11 +24,11 @@ import java.util.Arrays;
  * The type JavaUdpServer.
  */
 public class JUServer extends Thread {
-    private static int port;
+    private int port;
 
-    private static DatagramSocket socket;
+    private DatagramSocket socket;
 
-    private static ClientManager clientManager;
+    private ClientManager clientManager;
 
     private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
