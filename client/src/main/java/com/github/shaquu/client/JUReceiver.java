@@ -10,6 +10,8 @@ import com.github.shaquu.shared.JUUtils;
 import com.github.shaquu.shared.packet.BaseData;
 import com.github.shaquu.shared.packet.LogonData;
 import com.github.shaquu.shared.packet.MessageData;
+import com.github.shaquu.shared.prefs.JUPrefs;
+import com.github.shaquu.shared.prefs.JUPrefsException;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -20,6 +22,7 @@ import java.net.DatagramSocket;
 public class JUReceiver implements Runnable {
     private DatagramSocket socket;
     private byte buf[];
+    private String clientName;
 
     /**
      * Instantiates a new JavaUdpReceiver.
@@ -27,9 +30,11 @@ public class JUReceiver implements Runnable {
      * @param socket the socket
      *
      */
-    JUReceiver(DatagramSocket socket) {
+    JUReceiver(DatagramSocket socket) throws JUPrefsException {
         this.socket = socket;
         this.buf = new byte[JUUtils.BUFFER_SIZE];
+
+        this.clientName = (String) JUPrefs.read("clientName", "", JUPrefs.Type.STRING);
     }
 
     public void run() {
@@ -56,9 +61,8 @@ public class JUReceiver implements Runnable {
             System.out.println(clientName + " : GOOD");
         } else if (data instanceof MessageData) {
             MessageData messagePacket = (MessageData) data;
-            String clientName = messagePacket.getClientName();
 
-            if (clientName.equalsIgnoreCase(((MessageData) data).getClientName())) {
+            if (this.clientName.equalsIgnoreCase(messagePacket.getClientName())) {
                 return;
             }
 
