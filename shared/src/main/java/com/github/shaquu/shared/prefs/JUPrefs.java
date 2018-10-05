@@ -61,6 +61,7 @@ public class JUPrefs {
                     preferences.putDouble(path, (Double) object);
                     break;
                 case STRING:
+                default:
                     preferences.put(path, (String) object);
                     break;
                 case BOOLEAN:
@@ -117,6 +118,7 @@ public class JUPrefs {
                 case DOUBLE:
                     return preferences.getDouble(path, (Double) optional);
                 case STRING:
+                default:
                     return preferences.get(path, (String) optional);
                 case BOOLEAN:
                     return preferences.getBoolean(path, (Boolean) optional);
@@ -126,8 +128,6 @@ public class JUPrefs {
         } catch (Exception e) {
             throw new JUPrefsException("Failed on JUPrefs read, path[" + path + "], optional[" + optional + "], type[" + type + "].", e);
         }
-
-        return optional;
     }
 
     /**

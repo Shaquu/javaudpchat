@@ -21,6 +21,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The type JavaUdpSender.
@@ -32,6 +34,8 @@ public class JUSender implements Runnable {
     private DatagramSocket socket;
 
     private boolean connected = false;
+
+    private Logger logger = Logger.getLogger(JUSender.class.getName());
 
     /**
      * Instantiates a new JavaUdpSender.
@@ -52,7 +56,7 @@ public class JUSender implements Runnable {
     }
 
     private boolean sendLogOn(String clientName) throws Exception {
-        System.out.println("Trygin to LogOn : " + address.getHostAddress());
+        logger.log(Level.INFO, "Trying to LogOn : " + address.getHostAddress());
         LogonData logonData = new LogonData(BaseData.Type.REQUEST, clientName);
         byte[] bytes = BaseData.getBytes(logonData);
         sendBytes(bytes);
@@ -66,34 +70,27 @@ public class JUSender implements Runnable {
     }
 
     public void run() {
-        System.out.println("Starting sender.");
+        logger.log(Level.INFO, "Starting sender.");
 
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        String clientName = null;
-        String message;
+        String clientName;
 
         try {
             clientName = (String) JUPrefs.read("clientName", null, JUPrefs.Type.STRING);
         } catch (JUPrefsException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.getMessage());
+            return;
         }
 
         while (!connected) {
             try {
-                if (clientName == null) {
-                    System.out.println("Your name: ");
-                    clientName = in.readLine();
-
-                    if (clientName.trim().length() < 1) {
-                        clientName = null;
-                    }
-                }
                 connected = sendLogOn(clientName);
             } catch (Exception e) {
-                System.err.println(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String message;
 
         while (true) {
             try {
@@ -102,7 +99,7 @@ public class JUSender implements Runnable {
                 }
                 message = in.readLine();
 
-                if (message.trim().length() < 1) {
+                if (message.trim().length() <= 0) {
                     message = null;
                 }
 
@@ -110,7 +107,7 @@ public class JUSender implements Runnable {
                     sendMessage(clientName, message);
                 }
             } catch (Exception e) {
-                System.err.println(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }
     }

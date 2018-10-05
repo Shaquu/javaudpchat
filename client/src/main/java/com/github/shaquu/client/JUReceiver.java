@@ -15,6 +15,8 @@ import com.github.shaquu.shared.prefs.JUPrefsException;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The type JavaUdpReceiver.
@@ -23,6 +25,8 @@ public class JUReceiver implements Runnable {
     private DatagramSocket socket;
     private byte buf[];
     private String clientName;
+
+    private Logger logger = Logger.getLogger(JUReceiver.class.getName());
 
     /**
      * Instantiates a new JavaUdpReceiver.
@@ -39,27 +43,31 @@ public class JUReceiver implements Runnable {
     }
 
     public void run() {
-        System.out.println("Starting receiver.");
+        logger.log(Level.INFO, "Starting receiver.");
+
+        DatagramPacket packet;
+        BaseData data;
+
         while (true) {
             try {
-                DatagramPacket packet = new DatagramPacket(buf, buf.length);
+                packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
 
-                BaseData data = BaseData.getPacket(buf);
-                handlePacket(data, packet);
+                data = BaseData.getPacket(buf);
+                handleData(data);
             } catch (Exception e) {
-                System.err.println(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }
     }
 
 
-    private void handlePacket(BaseData data, DatagramPacket packet) {
+    private void handleData(BaseData data) {
         if (data instanceof LogonData) {
             LogonData logonData = (LogonData) data;
             String clientName = logonData.getClientName();
 
-            System.out.println(clientName + " : GOOD");
+            logger.log(Level.INFO, clientName + " : GOOD");
         } else if (data instanceof MessageData) {
             MessageData messagePacket = (MessageData) data;
 
@@ -71,7 +79,7 @@ public class JUReceiver implements Runnable {
                 return;
             }
 
-            System.out.println(clientName + " : " + messagePacket.getMessage());
+            logger.log(Level.INFO, clientName + " : " + messagePacket.getMessage());
         }
     }
 }
