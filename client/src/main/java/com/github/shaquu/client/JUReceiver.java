@@ -29,6 +29,7 @@ public class JUReceiver implements Runnable {
      *
      * @param socket the socket
      *
+     * @throws JUPrefsException the ju prefs exception
      */
     JUReceiver(DatagramSocket socket) throws JUPrefsException {
         this.socket = socket;

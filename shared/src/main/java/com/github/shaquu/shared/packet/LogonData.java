@@ -13,6 +13,13 @@ public class LogonData extends BaseData {
 
     private String clientName;
 
+    @Override
+    public String toString() {
+        return "LogonData{" +
+                "clientName='" + clientName + '\'' +
+                '}';
+    }
+
     /**
      * Instantiates a new Logon data.
      *
@@ -33,10 +40,4 @@ public class LogonData extends BaseData {
         return clientName;
     }
 
-    @Override
-    public String toString() {
-        return "LogonData{" +
-                "clientName='" + clientName + '\'' +
-                '}';
-    }
 }

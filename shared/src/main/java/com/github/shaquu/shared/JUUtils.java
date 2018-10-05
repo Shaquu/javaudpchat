@@ -22,6 +22,9 @@ import java.util.zip.Inflater;
  */
 public class JUUtils {
 
+    /**
+     * The constant BUFFER_SIZE.
+     */
     public final static int BUFFER_SIZE = 1024;
 
     /**
@@ -52,6 +55,15 @@ public class JUUtils {
         }
     }
 
+    /**
+     * Compress byte [ ].
+     *
+     * @param data the data
+     *
+     * @return the byte [ ]
+     *
+     * @throws IOException the io exception
+     */
     public static byte[] compress(byte[] data) throws IOException {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
@@ -66,6 +78,16 @@ public class JUUtils {
         return outputStream.toByteArray();
     }
 
+    /**
+     * Decompress byte [ ].
+     *
+     * @param data the data
+     *
+     * @return the byte [ ]
+     *
+     * @throws IOException         the io exception
+     * @throws DataFormatException the data format exception
+     */
     public static byte[] decompress(byte[] data) throws IOException, DataFormatException {
         Inflater inflater = new Inflater();
         inflater.setInput(data);

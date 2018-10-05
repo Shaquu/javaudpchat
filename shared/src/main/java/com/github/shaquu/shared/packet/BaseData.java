@@ -90,6 +90,7 @@ public abstract class BaseData implements Serializable {
     public String toString() {
         return "BaseData{" +
                 "type=" + type +
+                ", id=" + id +
                 '}';
     }
 
