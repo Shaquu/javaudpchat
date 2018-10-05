@@ -14,6 +14,15 @@ public class JUUtilsException extends Exception {
     /**
      * Instantiates a new JavaUdpUtilsException.
      *
+     * @param message the message
+     */
+    JUUtilsException(String message) {
+        super(message);
+    }
+
+    /**
+     * Instantiates a new JavaUdpUtilsException.
+     *
      * @param message   the message
      * @param exception the exception
      */

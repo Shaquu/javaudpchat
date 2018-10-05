@@ -16,8 +16,8 @@ import java.util.zip.DataFormatException;
  */
 public abstract class BaseData implements Serializable {
 
-    private Type type;
     private static long globalId = 0;
+    private Type type;
     private long id;
 
     /**
@@ -95,20 +95,6 @@ public abstract class BaseData implements Serializable {
     }
 
     /**
-     * The enum Type.
-     */
-    public enum Type {
-        /**
-         * Request type.
-         */
-        REQUEST,
-        /**
-         * Confirm type.
-         */
-        CONFIRM
-    }
-
-    /**
      * Gets id.
      *
      * @return the id
@@ -124,5 +110,19 @@ public abstract class BaseData implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * The enum Type.
+     */
+    public enum Type {
+        /**
+         * Request type.
+         */
+        REQUEST,
+        /**
+         * Confirm type.
+         */
+        CONFIRM
     }
 }

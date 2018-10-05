@@ -1,6 +1,5 @@
 # Java UDP Chat [![Build Status](https://travis-ci.org/Shaquu/javaudpchat.svg?branch=master)](https://travis-ci.org/Shaquu/javaudpchat) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba03c024bc354a60aa4793b35e4acfc0)](https://app.codacy.com/app/Shaquu/javaudpchat?utm_source=github.com&utm_medium=referral&utm_content=Shaquu/javaudpchat&utm_campaign=Badge_Grade_Dashboard)
 
-
 Java UDP Chat
 
 * [CLIENT](/client/README.md) - for Client download, build and run

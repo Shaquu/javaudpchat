@@ -6,6 +6,9 @@
 
 package com.github.shaquu.shared;
 
+import com.github.shaquu.shared.prefs.JUPrefs;
+import com.github.shaquu.shared.prefs.JUPrefsException;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,6 +16,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -27,11 +31,13 @@ public class JUUtils {
      */
     public final static int BUFFER_SIZE = 1024;
 
+    private static Scanner keyboard;
+
     /**
      * Instantiates a new JavaUdpUtils.
      */
     public JUUtils() {
-
+        keyboard = new Scanner(System.in);
     }
 
     /**
@@ -99,6 +105,51 @@ public class JUUtils {
         }
         outputStream.close();
         return outputStream.toByteArray();
+    }
+
+    /**
+     * Gets pref from keyboard.
+     *
+     * @param path      the path
+     * @param message   the message
+     * @param mandatory how many times to try to get value from keyboard, 0 is unlimited
+     * @param prefsType the prefs type
+     * @param optional  the optional value
+     *
+     * @throws JUPrefsException the ju prefs exception
+     * @throws JUUtilsException the ju utils exception
+     */
+    public static void getPrefFromKeyboard(String path, String message, int mandatory, JUPrefs.Type prefsType, Object optional) throws JUPrefsException, JUUtilsException {
+        String value;
+        int count = 0;
+
+        while (!JUPrefs.exist(path)) {
+            if (mandatory != 0 && count > mandatory) {
+                if (optional != null) {
+                    JUPrefs.write(path, optional, prefsType);
+                    return;
+                } else {
+                    throw new JUUtilsException("Getting value timeout.");
+                }
+            }
+
+            System.out.println(message);
+            value = keyboard.nextLine();
+
+            if (optional != null) {
+                if (value == null || value.trim().length() == 0) {
+                    JUPrefs.write(path, optional, prefsType);
+                    return;
+                }
+            }
+
+            if (value != null && value.trim().length() > 0) {
+                JUPrefs.write(path, value, prefsType);
+                return;
+            }
+
+            count++;
+        }
     }
 
 }

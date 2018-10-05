@@ -14,14 +14,6 @@ public class MessageData extends BaseData {
     private String clientName;
     private String message;
 
-    @Override
-    public String toString() {
-        return "MessageData{" +
-                "clientName='" + clientName + '\'' +
-                ", message='" + message + '\'' +
-                '}';
-    }
-
     /**
      * Instantiates a new Message data.
      *
@@ -34,6 +26,14 @@ public class MessageData extends BaseData {
 
         this.clientName = clientName;
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageData{" +
+                "clientName='" + clientName + '\'' +
+                ", message='" + message + '\'' +
+                '}';
     }
 
     /**
