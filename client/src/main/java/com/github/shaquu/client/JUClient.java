@@ -10,11 +10,15 @@ import com.github.shaquu.shared.JUUtils;
 import com.github.shaquu.shared.prefs.JUPrefs;
 
 import java.net.DatagramSocket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * JavaUdpClient.
  */
 public class JUClient {
+
+    private static Logger logger = Logger.getLogger(JUClient.class.getName());
 
     /**
      * Main.
@@ -24,7 +28,8 @@ public class JUClient {
      * @throws Exception the exception
      */
     public static void main(String args[]) throws Exception {
-        System.out.println("Starting client.");
+        logger.log(Level.INFO, "Starting client.");
+
         new JUPrefs();
         new JUUtils();
 

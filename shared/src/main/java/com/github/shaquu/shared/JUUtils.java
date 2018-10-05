@@ -17,6 +17,8 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -32,6 +34,8 @@ public class JUUtils {
     public final static int BUFFER_SIZE = 1024;
 
     private static Scanner keyboard;
+
+    private static Logger logger = Logger.getLogger(JUUtils.class.getName());
 
     /**
      * Instantiates a new JavaUdpUtils.
@@ -56,7 +60,7 @@ public class JUUtils {
             try {
                 return InetAddress.getLocalHost().getHostAddress();
             } catch (UnknownHostException ee) {
-                throw new JUUtilsException("Cannot determing ip address.", ee);
+                throw new JUUtilsException("Cannot determine ip address.", ee);
             }
         }
     }
@@ -133,7 +137,7 @@ public class JUUtils {
                 }
             }
 
-            System.out.println(message);
+            logger.log(Level.INFO, message);
             value = keyboard.nextLine();
 
             if (optional != null) {

@@ -17,8 +17,9 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
-import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The type JavaUdpServer.
@@ -30,7 +31,7 @@ public class JUServer extends Thread {
 
     private ClientManager clientManager;
 
-    private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
+    private Logger logger = Logger.getLogger(JUServer.class.getName());
 
     /**
      * Instantiates a new JavaUdpServer.
@@ -39,7 +40,7 @@ public class JUServer extends Thread {
      * @throws SocketException  the socket exception
      */
     public JUServer() throws JUPrefsException, SocketException {
-        System.out.println("Starting server.");
+        logger.log(Level.INFO, "Starting server.");
         new JUPrefs();
 
         port = (int) JUPrefs.read("port", 12345, JUPrefs.Type.INT);
@@ -61,7 +62,7 @@ public class JUServer extends Thread {
     }
 
     public void run() {
-        System.out.println("Listening...");
+        logger.log(Level.INFO, "Listening...");
         byte[] buf = new byte[JUUtils.BUFFER_SIZE];
         while (true) {
             try {
@@ -73,7 +74,7 @@ public class JUServer extends Thread {
 
                 handlePacket(data, packet);
             } catch (Exception e) {
-                System.err.println(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }
     }
@@ -84,10 +85,10 @@ public class JUServer extends Thread {
             String shortId = clientManager.add(packet.getAddress(), packet.getPort(), logonData.getClientName());
             String longId = clientManager.getLongId(packet.getAddress(), packet.getPort());
 
-            System.out.println(longId + " : " + logonData);
+            logger.log(Level.INFO, longId + " : " + logonData);
 
-            LogonData logonDataResponse = new LogonData(BaseData.Type.CONFIRM, "SERWER");
-            byte[] bytes = BaseData.getBytes(logonDataResponse);
+            LogonData logonResponse = new LogonData(BaseData.Type.CONFIRM, "SERWER");
+            byte[] bytes = BaseData.getBytes(logonResponse);
 
             ClientData client = clientManager.get(shortId);
 
@@ -97,19 +98,21 @@ public class JUServer extends Thread {
             String shortId = clientManager.getShortId(packet.getAddress(), packet.getPort());
 
             if (clientManager.get(shortId) == null) {
-                System.out.println("UNREGISTERED USER");
-                System.out.println(shortId + " : " + messageData);
+                logger.log(Level.INFO, "UNREGISTERED USER");
+                logger.log(Level.INFO, shortId + " : " + messageData);
             } else {
                 String longId = clientManager.getLongId(packet.getAddress(), packet.getPort());
-                System.out.println(longId + " : " + messageData);
+                logger.log(Level.INFO, longId + " : " + messageData);
                 byte[] bytes = BaseData.getBytes(messageData);
+
+                MessageData msgResponse;
 
                 for (ClientData client : clientManager) {
                     if (!client.getId().equalsIgnoreCase(shortId)) {
                         sendBytes(client, bytes);
                     } else {
-                        MessageData messageDataResponse = new MessageData(BaseData.Type.CONFIRM, "SERWER", "GOOD");
-                        byte[] bytesResponse = BaseData.getBytes(messageDataResponse);
+                        msgResponse = new MessageData(BaseData.Type.CONFIRM, "SERWER", "GOOD");
+                        byte[] bytesResponse = BaseData.getBytes(msgResponse);
                         sendBytes(client, bytes);
                     }
                 }
