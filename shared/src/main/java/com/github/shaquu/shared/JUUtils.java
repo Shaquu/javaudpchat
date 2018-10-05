@@ -16,6 +16,8 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,6 +156,25 @@ public class JUUtils {
 
             count++;
         }
+    }
+
+    /**
+     * Split message list.
+     *
+     * @param message the message
+     * @param size    the size
+     *
+     * @return the list
+     */
+    public static List<String> splitMessage(String message, int size) {
+        List<String> messageParts = new ArrayList<>();
+
+        int length = message.length();
+        for (int i = 0; i < length; i += size) {
+            messageParts.add(message.substring(i, Math.min(length, i + size)));
+        }
+
+        return messageParts;
     }
 
 }

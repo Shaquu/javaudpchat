@@ -64,9 +64,13 @@ public class JUSender implements Runnable {
     }
 
     private void sendMessage(String clientName, String message) throws Exception {
-        MessageData messagePacket = new MessageData(BaseData.Type.REQUEST, clientName, message);
-        byte[] bytes = BaseData.getBytes(messagePacket);
-        sendBytes(bytes);
+        if (message.length() > JUUtils.BUFFER_SIZE) {
+            for (String m : JUUtils.splitMessage(message, JUUtils.BUFFER_SIZE)) {
+                sendData(new MessageData(BaseData.Type.REQUEST, clientName, m));
+            }
+        } else {
+            sendData(new MessageData(BaseData.Type.REQUEST, clientName, message));
+        }
     }
 
     public void run() {
@@ -110,6 +114,11 @@ public class JUSender implements Runnable {
                 logger.log(Level.WARNING, e.getMessage());
             }
         }
+    }
+
+    private void sendData(BaseData data) throws IOException {
+        byte[] bytes = BaseData.getBytes(data);
+        sendBytes(bytes);
     }
 
     private void sendBytes(byte[] bytes) throws IOException {
