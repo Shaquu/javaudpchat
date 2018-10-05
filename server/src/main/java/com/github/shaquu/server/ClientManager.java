@@ -35,7 +35,7 @@ public class ClientManager implements Iterable<ClientData> {
      *
      * @return the long id
      */
-    String getLongId(InetAddress address, Integer port) {
+    protected String getLongId(InetAddress address, Integer port) {
         String clientName = getClientName(address, port);
         return clientName + " [" + address.toString() + ":" + port + "]";
     }
@@ -48,7 +48,7 @@ public class ClientManager implements Iterable<ClientData> {
      *
      * @return the short id
      */
-    String getShortId(InetAddress address, Integer port) {
+    protected String getShortId(InetAddress address, Integer port) {
         return address.toString() + ":" + port;
     }
 
@@ -60,7 +60,7 @@ public class ClientManager implements Iterable<ClientData> {
      *
      * @return the client name
      */
-    String getClientName(InetAddress address, Integer port) {
+    protected String getClientName(InetAddress address, Integer port) {
         String shortId = getShortId(address, port);
         return get(shortId).getName();
     }
@@ -74,7 +74,7 @@ public class ClientManager implements Iterable<ClientData> {
      *
      * @return the string
      */
-    String add(InetAddress address, Integer port, String clientName) {
+    protected String add(InetAddress address, Integer port, String clientName) {
         String shortId = getShortId(address, port);
 
         if (!ids.contains(shortId)) {
@@ -93,7 +93,7 @@ public class ClientManager implements Iterable<ClientData> {
      *
      * @return the client data
      */
-    ClientData get(String shortId) {
+    protected ClientData get(String shortId) {
         for (ClientData clientData : clients) {
             if (clientData.getId().equalsIgnoreCase(shortId)) {
                 return clientData;
