@@ -1,4 +1,4 @@
-# Java UDP Chat [![Build Status](https://travis-ci.org/Shaquu/javaudpchat.svg?branch=master)](https://travis-ci.org/Shaquu/javaudpchat) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba03c024bc354a60aa4793b35e4acfc0)](https://app.codacy.com/app/Shaquu/javaudpchat?utm_source=github.com&utm_medium=referral&utm_content=Shaquu/javaudpchat&utm_campaign=Badge_Grade_Dashboard)
+# Java UDP Chat [![Build Status](https://travis-ci.org/Shaquu/javaudpchat.svg?branch=master)](https://travis-ci.org/Shaquu/javaudpchat) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba03c024bc354a60aa4793b35e4acfc0)](https://app.codacy.com/app/Shaquu/javaudpchat?utm_source=github.com&utm_medium=referral&utm_content=Shaquu/javaudpchat&utm_campaign=Badge_Grade_Dashboard) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/6d58507fd414422784f9e871a5bf72c4)](https://www.codacy.com/app/Shaquu/javaudpchat?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Shaquu/javaudpchat&amp;utm_campaign=Badge_Coverage)
 
 Java UDP Chat
 
