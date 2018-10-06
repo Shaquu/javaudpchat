@@ -10,15 +10,15 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 /**
- * The type JavaUdpPrefs.
+ * JavaUdpChat Preferences.
  */
 public class JUPrefs {
     private static Preferences preferences;
 
     /**
-     * Instantiates a new JavaUdpPrefs.
+     * Instantiates a new JUPrefs.
      *
-     * @throws JUPrefsException the JavaUdpPefs exception
+     * @throws JUPrefsException on init fail
      */
     public JUPrefs() throws JUPrefsException {
         init();
@@ -35,13 +35,13 @@ public class JUPrefs {
     }
 
     /**
-     * Write.
+     * Write value to preferences.
      *
-     * @param path   the path
-     * @param object the object
-     * @param type   the type
+     * @param path   the path where to write value
+     * @param object the object itself
+     * @param type   the type of the object
      *
-     * @throws JUPrefsException the JavaUdpPrefs exception
+     * @throws JUPrefsException if putting value in preferences fail
      */
     public static void write(String path, Object object, Type type) throws JUPrefsException {
         init();
@@ -77,13 +77,13 @@ public class JUPrefs {
     }
 
     /**
-     * Exist boolean.
+     * Check if there is value written on the path.
      *
-     * @param path the path
+     * @param path the path of the value
      *
-     * @return the boolean
+     * @return the boolean if path is written
      *
-     * @throws JUPrefsException the JavaUdpPrefs exception
+     * @throws JUPrefsException on reading fail
      */
     public static boolean exist(String path) throws JUPrefsException {
         try {
@@ -94,15 +94,15 @@ public class JUPrefs {
     }
 
     /**
-     * Read object.
+     * Read object from preferences on the path.
      *
-     * @param path     the path
-     * @param optional the optional
-     * @param type     the type
+     * @param path     the path of the value
+     * @param optional the optional to return if there is no value written on path
+     * @param type     the type of the object
      *
-     * @return the object
+     * @return the object itself
      *
-     * @throws JUPrefsException the JavaUdpPrefs exception
+     * @throws JUPrefsException if reading fail
      */
     public static Object read(String path, Object optional, Type type) throws JUPrefsException {
         init();
@@ -131,11 +131,11 @@ public class JUPrefs {
     }
 
     /**
-     * Remove.
+     * Remove value from references
      *
-     * @param path the path
+     * @param path the path of the value
      *
-     * @throws JUPrefsException the JavaUdpPrefs exception
+     * @throws JUPrefsException if removing fail
      */
     public static void remove(String path) throws JUPrefsException {
         init();
@@ -148,7 +148,7 @@ public class JUPrefs {
     }
 
     /**
-     * The enum Type.
+     * The type of data used in Preferences
      */
     public enum Type {
         /**

@@ -7,12 +7,12 @@
 package com.github.shaquu.shared;
 
 /**
- * The type JavaUdpUtilsException.
+ * The type JavaUdpChat UtilsException.
  */
 public class JUUtilsException extends Exception {
 
     /**
-     * Instantiates a new JavaUdpUtilsException.
+     * Instantiates a new JUUtilsException.
      *
      * @param message the message
      */
@@ -21,7 +21,7 @@ public class JUUtilsException extends Exception {
     }
 
     /**
-     * Instantiates a new JavaUdpUtilsException.
+     * Instantiates a new JUUtilsException.
      *
      * @param message   the message
      * @param exception the exception

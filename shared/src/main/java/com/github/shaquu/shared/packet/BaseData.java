@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.zip.DataFormatException;
 
 /**
- * The type Base data.
+ * BaseData.
  */
 public abstract class BaseData implements Serializable {
 
@@ -21,7 +21,7 @@ public abstract class BaseData implements Serializable {
     private long id;
 
     /**
-     * Instantiates a new Base data.
+     * Instantiates a new BaseData.
      *
      * @param type the type
      */
@@ -31,7 +31,7 @@ public abstract class BaseData implements Serializable {
     }
 
     /**
-     * Gets packet.
+     * Gets packet from bytes.
      *
      * @param bytes the bytes
      *
@@ -41,7 +41,7 @@ public abstract class BaseData implements Serializable {
      * @throws ClassNotFoundException the class not found exception
      * @throws DataFormatException    the data format exception
      */
-    public static BaseData getPacket(byte[] bytes) throws IOException, ClassNotFoundException, DataFormatException {
+    public static BaseData getData(byte[] bytes) throws IOException, ClassNotFoundException, DataFormatException {
         byte[] uncompressed = JUUtils.decompress(bytes);
 
         ByteArrayInputStream bis = new ByteArrayInputStream(uncompressed);
@@ -56,19 +56,19 @@ public abstract class BaseData implements Serializable {
     }
 
     /**
-     * Get bytes byte [ ].
+     * Get bytes from data
      *
-     * @param packet the packet
+     * @param data the packet
      *
      * @return the byte [ ]
      *
      * @throws IOException the io exception
      */
-    public static byte[] getBytes(BaseData packet) throws IOException {
+    public static byte[] getBytes(BaseData data) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         ObjectOutput out = new ObjectOutputStream(bos);
-        out.writeObject(packet);
+        out.writeObject(data);
         out.flush();
 
         byte[] bytes = bos.toByteArray();

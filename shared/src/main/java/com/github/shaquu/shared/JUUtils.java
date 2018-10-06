@@ -26,7 +26,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 /**
- * The type JavaUdpUtils.
+ * The type JUUtils.
  */
 public class JUUtils {
 
@@ -40,14 +40,14 @@ public class JUUtils {
     private static Logger logger = Logger.getLogger(JUUtils.class.getName());
 
     /**
-     * Instantiates a new JavaUdpUtils.
+     * Instantiates a new JUUtils.
      */
     public JUUtils() {
         JUUtils.keyboard = new Scanner(System.in);
     }
 
     /**
-     * Gets global ip.
+     * Gets main server ip from repository.
      *
      * @return the global ip
      *

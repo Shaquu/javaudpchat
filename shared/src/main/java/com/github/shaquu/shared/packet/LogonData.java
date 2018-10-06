@@ -7,14 +7,14 @@
 package com.github.shaquu.shared.packet;
 
 /**
- * The type Logon data.
+ * LogonData used for logging to the server for the first time in session.
  */
 public class LogonData extends BaseData {
 
     private String clientName;
 
     /**
-     * Instantiates a new Logon data.
+     * Instantiates a new LogonData.
      *
      * @param type       the type
      * @param clientName the client name

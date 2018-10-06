@@ -74,7 +74,7 @@ public class JUServer extends Thread {
                 packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
 
-                data = BaseData.getPacket(buf);
+                data = BaseData.getData(buf);
                 handlePacket(data, packet);
             } catch (Exception e) {
                 logger.log(Level.WARNING, e.getMessage());

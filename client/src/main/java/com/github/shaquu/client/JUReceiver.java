@@ -53,7 +53,7 @@ public class JUReceiver implements Runnable {
                 packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
 
-                data = BaseData.getPacket(buf);
+                data = BaseData.getData(buf);
                 handleData(data);
             } catch (Exception e) {
                 logger.log(Level.WARNING, e.getMessage());

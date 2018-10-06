@@ -7,12 +7,12 @@
 package com.github.shaquu.shared.prefs;
 
 /**
- * The type JavaUdpPrefsException.
+ * JavaUdpChat PreferencesException
  */
 public class JUPrefsException extends Exception {
 
     /**
-     * Instantiates a new JavaUdpPrefs exception.
+     * Instantiates a new JUPrefsException.
      *
      * @param message   the message
      * @param exception the exception

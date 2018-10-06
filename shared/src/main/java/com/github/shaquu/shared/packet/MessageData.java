@@ -7,7 +7,7 @@
 package com.github.shaquu.shared.packet;
 
 /**
- * The type Message data.
+ * MessageData used for sending message on the chat.
  */
 public class MessageData extends BaseData {
 
@@ -15,7 +15,7 @@ public class MessageData extends BaseData {
     private String message;
 
     /**
-     * Instantiates a new Message data.
+     * Instantiates a new MessageData.
      *
      * @param type       the type
      * @param clientName the client name
