@@ -6,6 +6,8 @@
 
 package com.github.shaquu.shared.packet;
 
+import java.util.Objects;
+
 /**
  * LogonData used for logging to the server for the first time in session.
  */
@@ -22,6 +24,20 @@ public class LogonData extends BaseData {
     public LogonData(Type type, String clientName) {
         super(type);
         this.clientName = clientName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LogonData)) return false;
+        if (!super.equals(o)) return false;
+        LogonData logonData = (LogonData) o;
+        return Objects.equals(clientName, logonData.clientName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), clientName);
     }
 
     @Override

@@ -6,6 +6,8 @@
 
 package com.github.shaquu.shared.packet;
 
+import java.util.Objects;
+
 /**
  * MessageData used for sending message on the chat.
  */
@@ -29,6 +31,21 @@ public class MessageData extends BaseData {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MessageData)) return false;
+        if (!super.equals(o)) return false;
+        MessageData that = (MessageData) o;
+        return Objects.equals(clientName, that.clientName) &&
+                Objects.equals(message, that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), clientName, message);
+    }
+
+    @Override
     public String toString() {
         return "MessageData{" +
                 "clientName='" + clientName + '\'' +
@@ -46,20 +63,20 @@ public class MessageData extends BaseData {
     }
 
     /**
-     * Gets client name.
-     *
-     * @return the client name
-     */
-    public String getClientName() {
-        return clientName;
-    }
-
-    /**
      * Sets message.
      *
      * @param message the message
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * Gets client name.
+     *
+     * @return the client name
+     */
+    public String getClientName() {
+        return clientName;
     }
 }

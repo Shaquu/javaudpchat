@@ -9,6 +9,7 @@ package com.github.shaquu.shared.packet;
 import com.github.shaquu.shared.JUUtils;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.zip.DataFormatException;
 
 /**
@@ -110,6 +111,20 @@ public abstract class BaseData implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BaseData)) return false;
+        BaseData data = (BaseData) o;
+        return id == data.id &&
+                type == data.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, id);
     }
 
     /**
