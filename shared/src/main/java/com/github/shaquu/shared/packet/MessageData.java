@@ -54,4 +54,12 @@ public class MessageData extends BaseData {
         return clientName;
     }
 
+    /**
+     * Sets message.
+     *
+     * @param message the message
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

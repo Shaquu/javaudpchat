@@ -64,12 +64,16 @@ public class JUSender implements Runnable {
     }
 
     private void sendMessage(String clientName, String message) throws Exception {
+        MessageData messageData = new MessageData(BaseData.Type.REQUEST, clientName, "");
+
         if (message.length() > JUUtils.BUFFER_SIZE) {
             for (String m : JUUtils.splitMessage(message, JUUtils.BUFFER_SIZE)) {
-                sendData(new MessageData(BaseData.Type.REQUEST, clientName, m));
+                messageData.setMessage(m);
+                sendData(messageData);
             }
         } else {
-            sendData(new MessageData(BaseData.Type.REQUEST, clientName, message));
+            messageData.setMessage(message);
+            sendData(messageData);
         }
     }
 
