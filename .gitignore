@@ -112,5 +112,4 @@ fabric.properties
 /.idea/
 /*.iml
 pom.xml.versionsBackup
-/pre-commit-hook.sh
-/usefull.scripts
+/scripts/
