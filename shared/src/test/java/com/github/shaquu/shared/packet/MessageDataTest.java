@@ -29,15 +29,16 @@ class MessageDataTest {
 
         BaseData.Type type = BaseData.Type.REQUEST;
         final String clientName = "clientName";
-        final String message = "message";
+        final String message1 = "message1";
+        final String message2 = "message2";
         final long id = 1;
 
-        MessageData messageData1 = new MessageData(type, clientName, message);
-        MessageData messageData2 = new MessageData(type, clientName, message);
+        MessageData messageData1 = new MessageData(type, clientName, message1);
+        MessageData messageData2 = new MessageData(type, clientName, message1);
 
         assertEquals(type, messageData1.getType(), "Type is not the same.");
         assertEquals(clientName, messageData1.getClientName(), "ClientName is not the same.");
-        assertEquals(message, messageData1.getMessage(), "Message is not the same.");
+        assertEquals(message1, messageData1.getMessage(), "Message is not the same.");
 
         messageData1.setId(id);
         messageData2.setId(id);
@@ -46,5 +47,8 @@ class MessageDataTest {
 
         assertEquals(messageData1.hashCode(), messageData2.hashCode(), "HashCode is not the same.");
         assertEquals(messageData1.toString(), messageData2.toString(), "ToString is not the same.");
+
+        messageData1.setMessage(message2);
+        assertEquals(message2, messageData1.getMessage(), "Message is not the same.");
     }
 }
