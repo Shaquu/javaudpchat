@@ -14,11 +14,11 @@ os:
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install jq ; fi
 - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo apt-get install jq ; fi
-- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url) ; fi
 
 after_success:
 - mvn org.jacoco:jacoco-maven-plugin:0.8.2:report
-- java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r shared/target/site/jacoco/jacoco.xml --partial
-- java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r client/target/site/jacoco/jacoco.xml --partial
-- java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r server/target/site/jacoco/jacoco.xml --partial
-- java -jar ~/codacy-coverage-reporter-assembly-latest.jar final
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r shared/target/site/jacoco/jacoco.xml --partial ; fi
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r client/target/site/jacoco/jacoco.xml --partial ; fi
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r server/target/site/jacoco/jacoco.xml --partial ; fi
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then java -jar ~/codacy-coverage-reporter-assembly-latest.jar final ; fi
