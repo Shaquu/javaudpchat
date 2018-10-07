@@ -28,11 +28,12 @@ class BaseDataTest {
         logger.log(Level.INFO, "Starting test constructor");
 
         BaseData.Type type = BaseData.Type.REQUEST;
-        final String clientName = "clientName";
         final long id = 1;
 
-        BaseData baseData1 = new LogonData(type, clientName);
-        BaseData baseData2 = new LogonData(type, clientName);
+        BaseData baseData1 = new BaseData(type) {
+        };
+        BaseData baseData2 = new BaseData(type) {
+        };
 
         assertEquals(type, baseData1.getType(), "Type is not the same.");
 
