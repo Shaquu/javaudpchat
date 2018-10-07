@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,6 +28,8 @@ class ClientDataTest {
      */
     @Test
     void constructor() {
+        logger.log(Level.INFO, "Starting test constructor");
+
         final String id1 = "id1";
         InetAddress address1 = null;
         final Integer port1 = 11111;
