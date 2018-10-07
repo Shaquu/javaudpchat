@@ -31,12 +31,16 @@ class BaseDataTest {
         final String clientName = "clientName";
         final long id = 1;
 
-        BaseData baseData = new LogonData(type, clientName);
+        BaseData baseData1 = new LogonData(type, clientName);
+        BaseData baseData2 = new LogonData(type, clientName);
 
-        assertEquals(type, baseData.getType(), "Type is not the same.");
+        assertEquals(type, baseData1.getType(), "Type is not the same.");
 
-        baseData.setId(id);
+        baseData1.setId(id);
+        baseData2.setId(id);
 
-        assertEquals(id, baseData.getId(), "Id is not the same.");
+        assertEquals(id, baseData1.getId(), "Id is not the same.");
+
+        assertEquals(baseData1.hashCode(), baseData2.hashCode(), "HashCode is not the same.");
     }
 }

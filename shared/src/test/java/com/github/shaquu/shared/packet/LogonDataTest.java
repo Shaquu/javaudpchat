@@ -31,13 +31,17 @@ class LogonDataTest {
         final String clientName = "clientName";
         final long id = 1;
 
-        LogonData logonData = new LogonData(type, clientName);
+        LogonData logonData1 = new LogonData(type, clientName);
+        LogonData logonData2 = new LogonData(type, clientName);
 
-        assertEquals(type, logonData.getType(), "Type is not the same.");
-        assertEquals(clientName, logonData.getClientName(), "ClientName is not the same.");
+        assertEquals(type, logonData1.getType(), "Type is not the same.");
+        assertEquals(clientName, logonData1.getClientName(), "ClientName is not the same.");
 
-        logonData.setId(id);
+        logonData1.setId(id);
+        logonData2.setId(id);
 
-        assertEquals(id, logonData.getId(), "Id is not the same.");
+        assertEquals(id, logonData1.getId(), "Id is not the same.");
+
+        assertEquals(logonData1.hashCode(), logonData2.hashCode(), "HashCode is not the same.");
     }
 }
