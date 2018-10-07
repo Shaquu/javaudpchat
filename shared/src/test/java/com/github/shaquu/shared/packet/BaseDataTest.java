@@ -42,5 +42,6 @@ class BaseDataTest {
         assertEquals(id, baseData1.getId(), "Id is not the same.");
 
         assertEquals(baseData1.hashCode(), baseData2.hashCode(), "HashCode is not the same.");
+        assertEquals(baseData1.toString(), baseData2.toString(), "ToString is not the same.");
     }
 }

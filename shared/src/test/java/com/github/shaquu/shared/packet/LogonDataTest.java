@@ -43,5 +43,6 @@ class LogonDataTest {
         assertEquals(id, logonData1.getId(), "Id is not the same.");
 
         assertEquals(logonData1.hashCode(), logonData2.hashCode(), "HashCode is not the same.");
+        assertEquals(logonData1.toString(), logonData2.toString(), "ToString is not the same.");
     }
 }

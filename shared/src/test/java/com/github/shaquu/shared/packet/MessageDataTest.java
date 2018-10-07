@@ -45,5 +45,6 @@ class MessageDataTest {
         assertEquals(id, messageData1.getId(), "Id is not the same.");
 
         assertEquals(messageData1.hashCode(), messageData2.hashCode(), "HashCode is not the same.");
+        assertEquals(messageData1.toString(), messageData2.toString(), "ToString is not the same.");
     }
 }
