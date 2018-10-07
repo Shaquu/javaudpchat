@@ -37,7 +37,9 @@ class JUUtilsTest {
 
         try {
             final String globalIp = JUUtils.getGlobalIp();
-            assertEquals("104.248.142.11", globalIp, "Global IP is not correct.");
+
+            final String expectedGlobalIp = "104.248.142.11";
+            assertEquals(expectedGlobalIp, globalIp, "Global IP is not correct.");
         } catch (JUUtilsException e) {
             logger.log(Level.WARNING, e.getMessage());
             fail("Failed while getting global IP");
