@@ -22,15 +22,24 @@ import java.util.zip.DataFormatException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * The type JUUtilsTest.
+ */
 class JUUtilsTest {
 
     private final static Logger logger = Logger.getLogger(JUUtilsTest.class.getName());
 
+    /**
+     * Sets up.
+     */
     @BeforeAll
     public static void setUp() {
         new JUUtils();
     }
 
+    /**
+     * Gets global ip test.
+     */
     @Test
     public void getGlobalIp() {
         logger.log(Level.INFO, "Starting test getGlobalIp");
@@ -46,6 +55,9 @@ class JUUtilsTest {
         }
     }
 
+    /**
+     * Compress logon data test.
+     */
     @Test
     public void compressLogonData() {
         logger.log(Level.INFO, "Starting test compressLogonData");
@@ -62,6 +74,9 @@ class JUUtilsTest {
         }
     }
 
+    /**
+     * Compress message data test.
+     */
     @Test
     public void compressMessageData() {
         logger.log(Level.INFO, "Starting test compressMessageData");
@@ -78,6 +93,9 @@ class JUUtilsTest {
         }
     }
 
+    /**
+     * Split message test.
+     */
     @Test
     public void splitMessage() {
         logger.log(Level.INFO, "Starting test splitMessage");
