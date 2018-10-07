@@ -33,6 +33,6 @@ class JUPrefsExceptionTest {
         JUPrefsException juPrefsException = new JUPrefsException(message, exception);
 
         assertEquals(message, juPrefsException.getMessage(), "Message is not the same");
-        assertEquals(exception, juPrefsException.getCause(), "Message is not the same");
+        assertEquals(exception, juPrefsException.getCause(), "Exception is not the same");
     }
 }

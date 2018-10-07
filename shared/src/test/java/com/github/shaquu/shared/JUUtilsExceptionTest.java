@@ -33,8 +33,8 @@ class JUUtilsExceptionTest {
         JUUtilsException juUtilsException1 = new JUUtilsException(message);
         JUUtilsException juUtilsException2 = new JUUtilsException(message, exception);
 
-        assertEquals(message, juUtilsException1.getMessage(), "Message is not the same");
-        assertEquals(message, juUtilsException2.getMessage(), "Message is not the same");
-        assertEquals(exception, juUtilsException2.getCause(), "Message is not the same");
+        assertEquals(message, juUtilsException1.getMessage(), "Message1 is not the same");
+        assertEquals(message, juUtilsException2.getMessage(), "Message2 is not the same");
+        assertEquals(exception, juUtilsException2.getCause(), "Exception is not the same");
     }
 }
