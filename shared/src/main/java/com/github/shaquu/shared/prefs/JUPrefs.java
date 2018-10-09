@@ -6,7 +6,6 @@
 
 package com.github.shaquu.shared.prefs;
 
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 /**
@@ -83,14 +82,12 @@ public class JUPrefs {
      *
      * @return the boolean if path is written
      *
-     * @throws JUPrefsException on reading fail
      */
-    public static boolean exist(String path) throws JUPrefsException {
-        try {
-            return preferences.nodeExists(path);
-        } catch (BackingStoreException e) {
-            throw new JUPrefsException("Failed on JUPrefs exist, path[" + path + "].", e);
-        }
+    public static boolean exist(String path) {
+        String value = preferences.get(path, "false");
+        if (value != null) {
+            return !value.equals("") && !value.equalsIgnoreCase("false");
+        } else return false;
     }
 
     /**
