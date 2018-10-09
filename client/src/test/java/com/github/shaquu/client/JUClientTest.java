@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 /**
  * The type JUClientTest.
  */
@@ -31,7 +33,9 @@ class JUClientTest {
     void constructor() {
         logger.log(Level.INFO, "Starting test constructor");
 
-        new JUClient();
+        JUClient client = new JUClient();
+
+        assertNotNull(client);
     }
 
 }
