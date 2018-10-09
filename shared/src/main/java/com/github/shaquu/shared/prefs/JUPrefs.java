@@ -86,7 +86,7 @@ public class JUPrefs {
     public static boolean exist(String path) {
         String value = preferences.get(path, "false");
         if (value != null) {
-            return !value.equals("") && !value.equalsIgnoreCase("false");
+            return !"".equals(value) && !"false".equalsIgnoreCase(value);
         } else return false;
     }
 
