@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * The type JUClientTest.
@@ -36,6 +37,12 @@ class JUClientTest {
         JUClient client = new JUClient();
 
         assertNotNull(client);
+
+        try {
+            JUClient.main(new String[]{});
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
     }
 
 }

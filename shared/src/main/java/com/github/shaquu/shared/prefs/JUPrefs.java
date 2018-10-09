@@ -81,7 +81,6 @@ public class JUPrefs {
      * @param path the path of the value
      *
      * @return the boolean if path is written
-     *
      */
     public static boolean exist(String path) {
         String value = preferences.get(path, "false");

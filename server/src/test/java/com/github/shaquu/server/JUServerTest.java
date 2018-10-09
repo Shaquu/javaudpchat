@@ -6,14 +6,11 @@
 
 package com.github.shaquu.server;
 
-import com.github.shaquu.shared.prefs.JUPrefsException;
 import org.junit.jupiter.api.Test;
 
-import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
@@ -31,10 +28,9 @@ class JUServerTest {
         logger.log(Level.INFO, "Starting test constructor");
 
         try {
-            JUServer server = new JUServer();
-            assertNotNull(server);
-        } catch (JUPrefsException | SocketException e) {
-            fail("Failed on constructor.");
+            JUServer.main(new String[]{});
+        } catch (Exception e) {
+            fail(e.getMessage());
         }
     }
 }
